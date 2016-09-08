@@ -35,8 +35,15 @@
 
         var isSequence = el.classList.contains('sequence');
 
-        children.forEach(function (child) {
+        for (var idx in children) {
+            var child = children[idx];
             var animEnd;
+
+            if (child.hasAttribute('data-finished')) {
+                continue;
+            }
+
+            child.setAttribute('data-finished', true);
             child.style.display = 'inline';
 
             if (child.classList.contains('joiner') || child.classList.contains('cross')) {
@@ -50,15 +57,12 @@
             }
 
             animEnd += Number(el.getAttribute('data-time-padding')) || 0;
+            endTime = Math.max(endTime, animEnd);
 
             if (isSequence) {
-                startTime = animEnd;
-                endTime = animEnd;
+                return endTime;
             }
-            else {
-                endTime = Math.max(endTime, animEnd);
-            }
-        });
+        }
 
         return endTime;
     }
@@ -70,7 +74,7 @@
             el.setAttribute('data-time-padding', 0.6);
         });
 
-        doAnim(startingAnim, 0);
+        return doAnim(startingAnim, 0);
     }
 
     window.runAnimation = runAnimation;

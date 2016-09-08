@@ -3246,6 +3246,14 @@
 				return !!( fragmentsShown.length || fragmentsHidden.length );
 
 			}
+			
+			if (currentSlide.dataset.fragmentCallback) {
+				var functionName = currentSlide.dataset.fragmentCallback;
+
+				if (window[functionName]) {
+					return window[functionName](currentSlide);
+				}
+			}
 
 		}
 

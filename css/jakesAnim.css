@@ -1,3 +1,12 @@
+.dark-theme .diagram-container svg use {
+  fill: #fafafa;
+}
+
+.dark-theme .diagram-container .label, .dark-theme .diagram-container .state-label {
+  fill: #fafafa;
+  font-family: "Open Sans";
+}
+
 .diagram-container h2 {
     margin-bottom: 60px;
 }
@@ -8,7 +17,7 @@
 
 .diagram-container .joiner {
     fill: none;
-    stroke: #009d81;
+    stroke: #ffc20a;
     stroke-width: 3.2;
 }
 
@@ -21,11 +30,11 @@
 
 .diagram-container .state-label {
     font-size: 32px;
-    fill: #009d81;
+    fill: #ffc20a;
 }
 
 .diagram-container .cross {
     fill: none;
-    stroke: #da0000;
+    stroke: #dd5044;
     stroke-width: 5.9;
 }

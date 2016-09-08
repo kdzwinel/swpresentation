@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Building web apps in 2016</title>
+    <title>Going offline with Service Worker</title>
 
-    <meta name="description" content="Building web apps in 2016">
+    <meta name="description" content="Going offline with Service Worker">
     <meta name="author" content="Konrad Dzwinel">
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -15,9 +15,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-    <link rel="stylesheet" href="css/lato.css">
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/my.css" id="theme">
+    <link rel="stylesheet" href="css/theme/my.css">
+    <link rel="stylesheet" href="css/theme/dark.css" id="theme">
     <link rel="stylesheet" href="css/jakesAnim.css">
 
     <!-- Code syntax highlighting -->
@@ -31,22 +31,23 @@
         link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
         document.getElementsByTagName('head')[0].appendChild(link);
     </script>
-
-    <!--[if lt IE 9]>
-    <script src="lib/js/html5shiv.js"></script>
-    <![endif]-->
 </head>
 
-<body>
+<body class="dark-theme">
 
 <div class="reveal">
 
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
-        <section class="slide" style="background-color: white">
-            <h4>Building web apps in</h4>
+        <div class='conf-logo'>
+          <img src='lib/img/dfua-logo-white.png' class='conf-logo-white'/>
+          <img src='lib/img/dfua-logo-light.png' class='conf-logo-color'/>
+        </div>
 
-            <h1>2016</h1>
+        <section class="slide">
+            <h4>Going offline with</h4>
+
+            <h1>Service Worker</h1>
 
             <div class='first-contact'>
                 <p>Konrad Dzwinel</p>
@@ -58,7 +59,8 @@
         </section>
 
         <section data-background="#c5dedf">
-            <img height="600" data-src="lib/img/brainly.png" alt="Brain.ly" class="clean"/>
+            <img height="600" data-src="lib/img/brainly-com.png" alt="Brainly.com" class="clean"/>
+            <img height="600" data-src="lib/img/znanija-com.png" alt="Znanija.com" class="clean fragment" style='position: absolute;right: 0; top: 150px'/>
         </section>
 
         <section data-background="#D5D8E8">
@@ -69,7 +71,7 @@
             <h1>Service Worker</h1>
         </section>
 
-        <section class="diagram-container">
+        <section class="diagram-container" data-fragment-callback="diagramNextStep">
             <h2>Programable proxy</h2>
             <svg viewBox="0 0 583.92999 198"><g transform="translate(-36.352 -187.593)"><text x="329.228" y="326.179" class="label">ServiceWorker</text><text x="87.057" y="369.32" class="label">Page</text><text x="572.326" y="369.177" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(241.641 147.125)"></use><use transform="translate(-33.099 166.197)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><use transform="translate(489.049 200.815)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network"></use><g class="anim sequence">
                 <g class="anim">
@@ -97,64 +99,6 @@
             <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
-        <section class="diagram-container">
-            <h2>Caching responses</h2>
-            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use><text x="400.625" y="253.272" class="label">Cache</text><use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path></g><text x="168.128" y="196.32" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1</text></g><g class="anim"><g class="joiner"><path d="M304.587 319.783c42.535 26.945 131.032 32.45 186.58 10.876"></path><path d="M480.67 328.615l12.032 1.294-8.38 8.604"></path></g><text class="fade-in state-label" y="201.45" x="213.165" transform="translate(-33.772 202.062) translate(220 -30)">2</text></g>
-                <g class="anim">
-                <text x="103.819" y="71.469" class="fade-in state-label" transform="translate(-33.772 202.062) translate(210.879 -89.29)">3</text>
-
-                    <g class="joiner">
-                        <path d="M 485.306 298.69 C 365.501 296.36 331.91241455078125 287.84893798828125 293.6067421875 267.97725415039065 C 257.48949777422325 249.24086407684115 311.776 168.135 349.213 168.183"/>
-                        <path d="M 340.78 164.397 L 350.472 168.957 L 340.21 173.519"/>
-                    </g>
-                    <g class="joiner">
-                        <path d="M 485.305 298.69 C 158.96422058304418 297.4392294229105 328.8551656940879 183.43650919962246 144.54900000000004 169.892"/>
-                        <path d="M152.65 164.397l-9.692 5.7 9.692 5.132"/>
-                    </g>
-            </g></g>
-                <text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use></g></svg>
-
-            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-        </section>
-
-        <section class="diagram-container">
-            <h2>Falling back to cache</h2>
-            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use><text x="400.625" y="253.272" class="label">Cache</text><use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1</text></g><g class="anim"><g class="joiner"><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">2</text></g><g class="anim"><g class="cross"><path d="M487.304 315.19l18.813 19.955"></path><path d="M503.267 312.91l-14.252 23.375"></path></g></g><g class="anim"><g class="joiner"><path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path><path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path></g><text class="fade-in state-label" y="91.993" x="145.324" transform="translate(-33.772 202.062) translate(220 -30)">3</text></g><g class="anim"><g class="joiner"><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4</text></g></g></g></svg>
-
-            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-        </section>
-
-        <section data-background="#010001" class="video">
-            <video src="lib/vid/flipkart-adb.mp4" width="370" height="664"></video>
-            <div class="author"><a href="https://flipkart.com">flipkart.com</a></div>
-        </section>
-
-        <section class="diagram-container">
-            <h2>Revalidating caches</h2>
-            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use><text x="400.625" y="253.272" class="label">Cache</text><use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1</text></g><g class="anim"><g class="joiner"><path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path><path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path></g><text class="fade-in state-label" y="91.993" x="145.324" transform="translate(-33.772 202.062) translate(220 -30)">2</text></g><g class="anim"><g class="joiner"><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">3</text></g><g class="anim"><g class="joiner"><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">4</text></g><g class="anim"><g class="joiner"><path d="M534.613 243.64c-1.14-30.785-30.215-70.12-83.804-70.69"></path><path d="M459.93 167.248l-11.4 6.27 11.4 5.132"></path></g><text class="fade-in state-label" y="149.572" x="215.445" transform="translate(-33.772 202.062) translate(312.925 -130.336)">5</text></g></g></g></svg>
-            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-        </section>
-
-        <section class="diagram-container" data-state="sw_demo">
-            <h2>Generic fallback</h2>
-            <svg viewBox="0 0 549.92853 265"> <g transform="translate(-36.352 -120.593)"> <text x="248.603" y="384.105" class="label">ServiceWorker</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use> <text x="89.548" y="252.972" class="label">Page</text> <use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use> <text x="537.439" y="383.491" class="label">Network</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use> <text x="400.625" y="253.272" class="label">Cache</text> <use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use> <g class="anim sequence"> <g class="anim"> <g class="joiner"> <path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path> <path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path> </g> <text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1 </text> </g> <g class="anim"> <g class="joiner"> <path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path> <path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path> </g> <text x="214.381" y="167.499" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">2 </text> </g> <g class="anim"> <g class="cross"> <path d="M487.304 315.19l18.813 19.955"></path> <path d="M503.267 312.91l-14.252 23.375"></path> </g> </g> <g class="anim"> <g class="joiner"> <path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path> <path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path> </g> <text class="fade-in state-label" y="116.993" x="180.962" transform="translate(-33.772 202.062) translate(220 -30)">3 </text> </g> <g class="anim"> <g class="cross"> <path d="M355.304 209.19l18.813 19.955"></path> <path d="M371.267 206.91l-14.252 23.375"></path> </g> </g> <g class="anim"> <g class="joiner"> <path d="M250.117 242.337c-1.063-37.234 66.623-45.397 99.6-54.972"></path> <path d="M336.148 185.074l14.283 2.245-9.836 8.624"></path> </g> <text class="fade-in state-label" y="133.95" x="185.218" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4 </text> </g> <g class="anim"> <g class="joiner"> <path d="M349.054 156.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path> <path d="M156.36 144.117l-9.12 9.69 11.97 1.712"></path> </g> <text x="145.324" y="67.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">5 </text> </g> </g> </g> </svg>
-            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-        </section>
-
-        <section>
-            <ul>
-                <li>fetch different image based on network capabilities</li>
-                <li>cache content when user requests it</li>
-                <li>render templates on-the-fly</li>
-                <li>transpile code on-the-fly</li>
-                <li>mock responses while developing</li>
-            </ul>
-        </section>
-
-        <section data-background="#EFFFE5">
-            <img height="300" data-src="lib/img/https.png" alt="HTTPS FTW" class="clean"/>
-        </section>
-
         <section>
             <h2>Registration</h2>
 
@@ -162,11 +106,9 @@
                 <use transform="translate(-70 -70)" xlink:href="#diagram-page"></use>
             </svg>
 
-            <pre><code data-trim>
-navigator.serviceWorker.register('/worker.js')
-  .then( reg => console.log('◕‿◕', reg) )
-  .catch( err => console.log('ಠ_ಠ', err) );
-            </code></pre>
+            <pre><code data-trim data-noescape>
+navigator.serviceWorker.register('/worker.js')<div class="fragment">  .then( swRegistration => console.log('Success 🎆') )
+  .catch( err => console.log('Failure 💩', err) );</div></code></pre>
 
             <div  class="fragment">
                 or (soon):
@@ -183,97 +125,129 @@ navigator.serviceWorker.register('/worker.js')
         </section>
 
         <section>
-            <h2>Handling requests</h2>
+            <h2>URL object</h2>
+
+            <pre><code data-trim data-noescape>
+const url = new URL("https://example.com/api/search?query='dfua'");
+<div class="fragment">if (url.hostname === 'example.com'
+    || url.pathname.includes('/api/') 
+    || url.searchParams.has('query')) {
+    //...
+}
+</div>
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Fetch API</h2>
+
+            <pre><code data-trim data-noescape>
+fetch("https://example.com/data.json")
+<div class="fragment">    .then(response => {
+        if(response.ok) {
+          // ...
+        }
+    })</div><div class="fragment">    .catch(connectionFailed)</div>
+            </code></pre>
+
+            <pre class="fragment"><code data-trim data-noescape>
+const request = new Request("https://example.com/endpoint", {<div class="fragment">    method: "POST",</div><div class="fragment">    headers: customHeaders,</div><div class="fragment">    body: '{"conf":"dfua"}'</div>});
+
+fetch(request).then(processResponse);
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Cache API</h2>
+
+            <pre><code data-trim data-noescape>
+caches.open('cache-v1').then(cache => {<div class="fragment">    cache.put(request, response);</div><div class="fragment">    cache.add('/main.js');</div><div class="fragment">    cache.addAll(['/main.css', 'https://fonts.com/roboto.woff2']);</div>
+    <div class="fragment">    cache.match('/main.css').then(cachedResponse => {
+        if (cachedResponse) {
+            showResource(cachedResponse);
+        }
+    });</div>
+}).catch(err => console.error(err));</code></pre>
+        </section>
+
+
+    <section class="diagram-container"  data-fragment-callback="diagramNextStep">
+        <h2>Cache, falling back to network</h2>
+        <!-- Ideal for: If you're building offline-first, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request. -->
+
+        <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache" width="549.929" height="342.978" transform="translate(461.439 210.129)"></use><text x="400.625" y="253.272" class="label">Network</text><use transform="translate(317.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network"></use><g class="anim sequence"><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56" ></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002" ></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)" >1</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315" ></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692" ></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)" >2</text></g><g class="anim" data-time-padding="0.6" ><g class="cross" ><path d="M487.304 315.19l18.813 19.955" ></path><path d="M503.267 312.91l-14.252 23.375" ></path></g></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M306.297 294.13c41.367 4.712 30.642-61.09 53.737-84.936" ></path><path d="M350.672 212.27l10.33-5.536-.98 12.597" ></path></g><text class="fade-in state-label" y="93.136" x="140.753" transform="translate(-33.772 202.062) translate(220 -30)" >3</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377" ></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712" ></path></g><g class="joiner"><path d="M450 172c50 26 155 24 100 70"></path><path d="M551 234l-5 10 15 -3"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text><text x="395" y="120" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text></g></g></g></svg>
+
+        <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
+    </section>
+
+        <section>
+            <h2>Putting it all togheter</h2>
 
             <svg style="width: 100px; height: 100px">
                 <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
             </svg>
 
-            <pre><code data-trim class="line-numbers">
-self.addEventListener('fetch', event => {
-  if( isArticle(event.request) ) {
-      event.respondWith(
-        caches.match(event.request)
-          .then( cachedArticle => {
-            if(cachedArticle) return cachedArticle;
-
-            return fetch(event.request)
-                .then( freshArticle => {
-                  cache.put(event.request, freshArticle.clone());
-                  return freshArticle;
-                });
-          })
-          .catch( () => caches.match('/offline.html') )
-      );
-  }
+            <pre><code data-trim data-noescape>
+self.addEventListener('fetch', event => {<div class='fragment'>  const url = new URL(event.request.url);
+  if( url.pathname.startsWith('/article/') ) {<div class='fragment'>      event.respondWith(<div class='fragment'>        cache.match(event.request)
+          .then( cachedItem => {
+            if(cachedItem) return cachedItem;
+            <div class='fragment'>            return fetch(event.request)
+                .then( freshItem => {<div class="fragment">                  cache.put(event.request, freshItem.clone());
+                  return freshItem;</div>                });</div>          });</div>
+      );</div>  }</div>
 });
             </code></pre>
 
         </section>
 
-        <section data-background="#FFFFFF">
-            <img data-src="lib/img/enthusiasm.png" alt="ServiceWorker enthusiasm" class="clean"/>
-            <br/>
-            <a href="https://jakearchibald.github.io/isserviceworkerready">Is ServiceWorker ready?</a>
+        <section>
+            <img height="600" data-src="lib/img/brainly-com.png" alt="Brainly.com" class="clean"/>
+        </section>
+
+        <section class="diagram-container"  data-fragment-callback="diagramNextStep">
+            <h2>Network falling back to cache</h2>
+            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use><text x="400.625" y="253.272" class="label">Cache</text><use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1</text></g><g class="anim"><g class="joiner"><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">2</text></g><g class="anim"><g class="cross"><path d="M487.304 315.19l18.813 19.955"></path><path d="M503.267 312.91l-14.252 23.375"></path></g></g><g class="anim"><g class="joiner"><path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path><path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path></g><text class="fade-in state-label" y="91.993" x="145.324" transform="translate(-33.772 202.062) translate(220 -30)">3</text></g><g class="anim"><g class="joiner"><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4</text></g></g></g></svg>
+
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
         <section>
-            <h1>Web App Manifest</h1>
+            <img height="600" data-src="lib/img/stats.png" alt="Subject stats" class="clean"/>
         </section>
 
-        <section data-background="#010001" class="video">
-            <video src="lib/vid/pokedex.mp4" width="360" height="640"></video>
-            <div class="author"><a href="https://pokedex.org">pokedex.org</a></div>
-        </section>
-
-        <section>
-            <h2>Attaching manifest</h2>
-                <pre><code data-trim>
-&lt;head&gt;
-  &hellip;
-  &lt;link rel="manifest" href="manifest.json" /&gt;
-  &hellip;
-&lt;/head&gt;
-                </code></pre>
+        <section class="diagram-container"  data-fragment-callback="diagramNextStep">
+            <h2>Revalidating caches</h2>
+            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Network</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use><text x="400.625" y="253.272" class="label">Cache</text><use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1</text></g><g class="anim"><g class="joiner"><path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path><path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path></g><text class="fade-in state-label" y="91.993" x="145.324" transform="translate(-33.772 202.062) translate(220 -30)">2</text></g><g class="anim"><g class="joiner"><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">3</text></g><g class="anim"><g class="joiner"><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">4</text></g><g class="anim"><g class="joiner"><path d="M534.613 243.64c-1.14-30.785-30.215-70.12-83.804-70.69"></path><path d="M459.93 167.248l-11.4 6.27 11.4 5.132"></path></g><text class="fade-in state-label" y="149.572" x="215.445" transform="translate(-33.772 202.062) translate(312.925 -130.336)">5</text></g></g></g></svg>
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
         <section>
-            <h2>manifest.json</h2>
-            <div>
-                <pre><code data-trim class="line-numbers">
-{
-  "name": "Pokedex.org - handy list of Pokémon",
-  "short_name": "Pokedex.org",
-  "icons": [
-    {
-      "src": "img/icon-196.png",
-      "sizes": "196x196",
-      "type": "image/png"
-    },
-    &hellip;
-  ],
-  "display": "standalone",
-  "orientation": "landscape",
-  "start_url": "index.html?launcher=true",
-  "background_color": "#EEEEEE",
-  "theme_color": "#A040A0"
-}
-                </code></pre>
-
-                <img src="lib/img/manifest_short_name.png" class="fragment" style="position: absolute; top: 180px; right: -20px"/>
-                <img src="lib/img/manifest_icon.png" class="fragment clean" style="position: absolute; top: 180px; right: -20px"/>
-                <img src="lib/img/manifest_background.png" class="fragment clean" style="position: absolute; top: 180px; right: -20px"/>
-                <img src="lib/img/manifest_theme_color.png" class="fragment clean" style="position: absolute; top: 180px; right: -20px"/>
-            </div>
+            <img height="600" data-src="lib/img/avatars.png" alt="User avatars" class="clean"/>
         </section>
 
-        <section data-background="#3367D6">
-            <img data-src="lib/img/add_to_home.png" alt="Add to Home Screen button" height="600"/>
+        <section class="diagram-container" data-state="sw_demo"  data-fragment-callback="diagramNextStep">
+            <h2>Generic fallback</h2>
+            <svg viewBox="0 0 549.92853 265"> <g transform="translate(-36.352 -120.593)"> <text x="248.603" y="384.105" class="label">ServiceWorker</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use> <text x="89.548" y="252.972" class="label">Page</text> <use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use> <text x="537.439" y="383.491" class="label">Network</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use> <text x="400.625" y="253.272" class="label">Cache</text> <use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use> <g class="anim sequence"> <g class="anim"> <g class="joiner"> <path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path> <path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path> </g> <text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1 </text> </g> 
+
+            <g class="anim"> <g class="joiner"> <path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path> <path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path> </g> <text class="fade-in state-label" y="116.993" x="180.962" transform="translate(-33.772 202.062) translate(220 -30)">2 </text> </g> <g class="anim"> <g class="cross"> <path d="M355.304 209.19l18.813 19.955"></path> <path d="M371.267 206.91l-14.252 23.375"></path> </g> </g> 
+            
+            <g class="anim"> <g class="joiner"> <path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path> <path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path> </g> <text x="214.381" y="167.499" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">3 </text> </g> <g class="anim"> <g class="cross"> <path d="M487.304 315.19l18.813 19.955"></path> <path d="M503.267 312.91l-14.252 23.375"></path> </g> </g> 
+            
+            <g class="anim"> <g class="joiner"> <path d="M250.117 242.337c-1.063-37.234 66.623-45.397 99.6-54.972"></path> <path d="M336.148 185.074l14.283 2.245-9.836 8.624"></path> </g> <text class="fade-in state-label" y="133.95" x="185.218" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4 </text> </g> 
+            
+            <g class="anim"> <g class="joiner"> <path d="M349.054 156.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path> <path d="M156.36 144.117l-9.12 9.69 11.97 1.712"></path> </g> <text x="145.324" y="67.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">5 </text> </g> </g> </g> </svg>
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
-        <section data-background="#ffd50f">
-            <img data-src="lib/img/add_to_home_banner.jpg" alt="Web App installation prompt" class="clean" height="600"/>
-            <div class="author white"><a href="https://addyosmani.com/blog/getting-started-with-progressive-web-apps/">&copy; Addy Osmani</a></div>
+        <section>
+            <ul>
+                <li>fetch different image based on network capabilities</li>
+                <li>cache content when user requests it</li>
+                <li>render templates on-the-fly</li>
+                <li>transpile code on-the-fly</li>
+                <li>mock responses while developing</li>
+            </ul>
         </section>
 
         <section>
@@ -293,18 +267,16 @@ self.addEventListener('fetch', event => {
         </section>
 
         <section>
-            <h2>Registration</h2>
+            <h2>Subscription</h2>
 
             <svg style="width: 100px; height: 100px">
                 <use transform="translate(-70 -70)" xlink:href="#diagram-page"></use>
             </svg>
 
-            <pre><code data-trim>
-navigator.serviceWorker.register('/worker.js').then(reg => {
-  reg.pushManager.subscribe({
+            <pre><code data-trim data-noescape>
+navigator.serviceWorker.register('/worker.js').then(swRegistration => {<div class="fragment">  swRegistration.pushManager.subscribe({
     userVisibleOnly: true
-  }).then( sub => console.log('endpoint:', sub.endpoint) );
-});
+  }).then( sub => console.log('endpoint:', sub.endpoint) );</div>});
             </code></pre>
 
         </section>
@@ -316,32 +288,104 @@ navigator.serviceWorker.register('/worker.js').then(reg => {
                 <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
             </svg>
 
-            <pre><code data-trim class="line-numbers">
-self.addEventListener('push', event => {
-  event.waitUntil(
+            <pre><code data-trim data-noescape>
+self.addEventListener('push', event => {<div class="fragment">  event.waitUntil(
     self.registration.showNotification('Title', {
       body: 'The Message',
       icon: 'images/icon.png',
       tag: 'my-tag'
-    }));
-});
+    }));</div>});
             </code></pre>
 
         </section>
 
-        <section class="diagram-container">
+        <section class="diagram-container" data-fragment-callback="diagramNextStep">
             <svg viewBox="0 0 549.92853 342.97787"><g transform="translate(-36.352 -42.615)"><text x="100" y="180" class="label">Push</text><text x="100" y="210" class="label">Message</text></text><text x="321.902" y="189.362" class="label">ServiceWorker</text><text x="538" y="186.362" class="label">Network</text><text y="379.362" x="216.277" class="label">Notification</text><text x="424.277" y="381.362" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cloud" width="549.929" height="342.978" transform="translate(16.971 15.971)"></use><use transform="translate(233.286 11.257)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(454.257 13)"></use><use transform="translate(347 209)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-notification" width="549.929" height="342.978" transform="translate(135 209)"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M154.643 84.45h103"></path><path d="M248.26 79.72l10.9 4.51-10.858 5"></path></g><text x="218.128" y="94.32" class="fade-in state-label" transform="translate(-6.971 127.219) translate(-1.386 -148.131)">1</text></g><g class="anim"><text class="fade-in state-label" x="358.572" y="83.597" transform="translate(-6.971 127.219) translate(81.772 -141.141)">2</text><g class="joiner"><path d="M379.793 78.763l102.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M379.793 96.763l102.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M379.793 90.763l102.057.46"></path></g><g class="joiner"><path d="M379.793 84.763l102.057.46"></path></g></g><g class="anim"><g class="joiner"><path d="M487.095 112.714c-87.967 6.467-78.01 129.51-78.01 129.51l-5.228-6.838"></path></g><g class="joiner"><path d="M495.443 130.41c-75.546 1.314-68.358 111.813-68.358 111.813l4.022-6.434"></path></g><g class="joiner"><path d="M492.258 124.78c-78.995 1.655-71.173 117.443-71.173 117.443"></path></g><g class="joiner"><path d="M489.073 118.747c-82.676 3.836-73.988 123.476-73.988 123.476"></path></g><text y="191.776" x="455.732" class="fade-in state-label" transform="translate(-6.971 127.219) translate(7.441 -127.441)">3</text></g><g class="anim"><text class="fade-in state-label" y="145.264" x="219.272" transform="translate(-6.971 127.219) translate(-10.978 -84.94)">4</text><g class="joiner"><path d="M262.968 124.172c-57.24 1.717-45.827 116.772-45.827 116.772"></path><path d="M211.077 231.84l5.724 11.448 5.154-11.448"></path></g></g></g></g></svg>
             <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
-        <section data-background="#010001" class="video">
-            <video src="lib/vid/emojoy.mp4" width="360" height="640"></video>
-            <div class="author"><a href="https://jakearchibald-gcm.appspot.com/">jakearchibald-gcm.appspot.com</a></div>
+
+        <section>
+            <h1>Background sync</h1>
         </section>
 
-        <section data-background="#000">
-            <h1 style="color:white">Wrap-up</h1>
+        <section>
+            <img height="600" data-src="lib/img/saving.png" alt="Saving your message" class="clean"/>
         </section>
+
+        <section class="diagram-container" data-fragment-callback="diagramNextStep">
+            <svg viewBox="0 0 460 160">
+                <g transform="translate(-36.352 -225.593)">
+                    <text x="106.692" y="368.362" class="label">Sync</text>
+                    <text x="251.902" y="368.362" class="label">Service Worker</text>
+                    <text x="428" y="369.362" class="label">Network</text>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-event" width="549.929" height="342.978" transform="translate(19.106 188.308)"></use>
+                    <use transform="translate(172 188)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw"></use>
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(346 192)"></use>
+                    <g class="anim sequence">
+                        <g class="anim">
+                            <g class="joiner"><path d="M160.126 280.362h37.956"></path><path d="M190.188 275.633l10.898 4.51-10.857 5"></path></g>
+                            <text x="160.128" y="96.32" class="fade-in state-label" transform="translate(18 175)">1</text>
+                        </g>
+                        <g class="anim">
+                            <text class="fade-in state-label" x="402.572" y="83.597" transform="translate(18 175) translate(-70.315 1.985)">2</text><g class="joiner"><path d="M324.677 269.67l50.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M324.677 287.67l50.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M324.677 281.67l50.057.46"></path></g><g class="joiner"><path d="M324.677 275.67l50.057.46"></path></g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
+        </section>
+
+        <section>
+            <h2>Registration</h2>
+
+            <svg style="width: 100px; height: 100px">
+                <use transform="translate(-70 -70)" xlink:href="#diagram-page"></use>
+            </svg>
+
+            <pre><code data-trim>
+navigator.serviceWorker.ready.then(swRegistration => {
+  swRegistration.sync.register('mySync');
+});
+</code></pre>
+        </section>
+
+        <section>
+            <h2>Event</h2>
+
+            <svg style="width: 100px; height: 100px">
+                <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
+            </svg>
+
+            <pre><code data-trim>
+self.addEventListener('sync', event => {
+  if (event.tag == 'mySync') {
+    event.waitUntil(doSomeStuff());
+  }
+});
+</code></pre>
+        </section>
+
+        <section>
+            <h1>DevTools</h1>
+        </section>
+
+        <section>
+            <div style="position:relative; width: 808px; height: 600px; margin: auto">
+            <img height="600" data-src="lib/img/dt-sw.png" alt="DevTools Application SW tab" class="clean" style="position:absolute; top: 0;left: 0"/>
+            <img height="600" data-src="lib/img/dt-cache.png" alt="DevTools Application Cache tab" class="fragment clean" style="position:absolute; top: 0;left: 0"/>
+            <img height="600" data-src="lib/img/dt-sources.png" alt="DevTools Sources SW tab" class="fragment clean" style="position:absolute; top: 0;left: 0"/>
+            <img height="600" data-src="lib/img/dt-console.png" alt="DevTools Console SW tab" class="fragment clean" style="position:absolute; top: 0;left: 0"/>
+            </div>
+        </section>
+
+        <section>
+            <img data-src="lib/img/enthusiasm.png" alt="ServiceWorker enthusiasm" class="clean"/>
+            <br/>
+            <a href="https://jakearchibald.github.io/isserviceworkerready">Is ServiceWorker ready?</a>
+        </section>
+
 
         <section data-state="pres_end">
             <div style="width: 960px; height: 700px; display: flex; align-items: center; vertical-align: middle">
@@ -350,7 +394,7 @@ self.addEventListener('push', event => {
                 <div class='contact'>
                     <a href='https://twitter.com/kdzwinel'><img class='clean' src='lib/img/logos/twitter.svg'/></a>
                     <a href='mailto:kdzwinel@gmail.com'><img class='clean' src='lib/img/logos/gmail.svg'/></a>
-                    <a href='https://github.com/kdzwinel'><img class='clean' src='lib/img/logos/gh.png'/></a>
+                    <a href='https://github.com/kdzwinel'><img class='clean' src='lib/img/logos/gh-white.png'/></a>
                     @kdzwinel
                 </div>
             </div>
@@ -412,17 +456,33 @@ self.addEventListener('push', event => {
             return;
         }
 
-        if(slide.classList.contains('diagram-container')) {
-            setTimeout(function() {
-                runAnimation(slide.querySelector('svg > g'));
-            }, 1500);
-        }
-
         if(slide.classList.contains('video')) {
             setTimeout(function() {
                 slide.querySelector('video').play();
             }, 500);
         }
+    });
+
+    window.diagramNextStep = function(slide) {
+        var endTime = runAnimation(slide.querySelector('svg > g'));
+        var stayOnTheSameSlide = endTime > 0;
+
+        return stayOnTheSameSlide;
+    };
+
+    var logoColor = document.querySelector('.conf-logo-color');
+    var logoWhite = document.querySelector('.conf-logo-white');
+    Reveal.addEventListener('slidechanged', function() {
+      logoColor.style.opacity = 1;
+
+      logoColor.addEventListener('transitionend', function goBack(e) {
+        if(e.target !== logoColor)
+          return;
+
+        logoColor.removeEventListener('transitionend', goBack);
+
+        logoColor.style.opacity = 0;
+      });
     });
 
     // Adding an event listener on slidechanged event to add line numbers to
@@ -444,10 +504,9 @@ self.addEventListener('push', event => {
                 $el.innerHTML = content;
             }
         });
-    });
-</script>
+    });</script>
 
-<svg class="diagram-defs"><defs><path d="M125.558 122.652V76.668c0-2.123-1.72-3.844-3.843-3.844l-38.2 23.772 42.043 26.056zM39.07 72.825c-2.122 0-3.843 1.72-3.843 3.844v49.964c0 2.123 1.72 3.846 3.844 3.846h82.65c2.122 0 3.842-1.722 3.842-3.845l-86.49-53.81zm59.67-11.272c-1.97 7.728-8.96 13.45-17.303 13.45-8.342 0-15.33-5.723-17.3-13.45H43.614v10.294L80.26 94.393l36.804-21.83v-11.01H98.74zM81.437 42.78c-7.924 0-14.346 6.42-14.346 14.346 0 7.925 6.427 14.35 14.35 14.35s14.35-6.425 14.35-14.35S89.36 42.78 81.44 42.78zm1.85 22.158H80.08V53.813h-3.137v-2.09h.29c1.068 0 1.91-.202 2.527-.603.615-.4 1.003-1.046 1.167-1.935h2.36v15.753z" id="diagram-notification"></path><path d="M105.74 133.947l-12.07-5.73c-1.36-.644-2.184-1.647-2.184-3.043v-.358c0-1.396.823-2.4 2.184-3.044l12.07-5.73c.427-.214.82-.357 1.324-.357 1.146-.035 2.184.967 2.184 2.256 0 1.04-.573 1.76-1.504 2.19l-10.814 4.83 10.814 4.834c.93.43 1.504 1.253 1.504 2.256 0 1.325-1.038 2.256-2.365 2.22-.392 0-.786-.143-1.144-.323zm6.803 5.373l14.002-29.257c.394-.823 1.038-1.253 1.898-1.253 1.146 0 2.112.967 2.112 2.04 0 .395-.143.79-.25 1.04l-14.002 29.255c-.394.823-1.038 1.253-1.898 1.253-1.146 0-2.112-.966-2.112-2.04 0-.395.142-.788.25-1.04zm25.067-23.277l12.067 5.73c1.36.644 2.184 1.647 2.184 3.043v.358c0 1.396-.82 2.4-2.18 3.043l-12.07 5.73c-.43.215-.82.358-1.323.358-1.146.035-2.184-.967-2.184-2.256 0-1.04.574-1.76 1.505-2.19l10.814-4.834-10.814-4.835c-.93-.43-1.504-1.252-1.504-2.255 0-1.326 1.04-2.257 2.365-2.22.392 0 .786.143 1.144.322zm31.91-27.436c0-1.866-1.513-3.377-3.38-3.377H76.08c-1.865 0-3.377 1.51-3.377 3.377v66.42c0 1.865 1.512 3.377 3.377 3.377h90.06c1.867 0 3.38-1.512 3.38-3.377v-66.42zm-74.865-.188c1.347 0 2.44 1.09 2.44 2.434s-1.092 2.44-2.44 2.44c-1.347 0-2.44-1.092-2.44-2.44 0-1.347 1.094-2.44 2.44-2.44zm-6.754 0c1.35 0 2.44 1.09 2.44 2.434s-1.09 2.44-2.44 2.44c-1.343 0-2.44-1.092-2.44-2.44 0-1.347 1.098-2.44 2.44-2.44zm-6.75 0c1.347 0 2.44 1.09 2.44 2.434s-1.092 2.44-2.44 2.44c-1.347 0-2.44-1.092-2.44-2.44 0-1.347 1.094-2.44 2.44-2.44zm83.87 65.48H77.21V97.61h87.81v56.29z" id="diagram-page"></path><path d="M82.687 42.615c-2.388 0-4.733.18-7.023.53l-.2-.09c-.02.044-.034.09-.054.13-22.133 3.493-39.058 22.648-39.058 45.76 0 25.59 20.744 46.334 46.334 46.334 25.588 0 46.333-20.748 46.333-46.338 0-25.587-20.748-46.33-46.337-46.33zm-9.65 51.123c-.73-.364-1.508-.646-2.328-.818.06-5.917.52-11.804 1.384-17.586 2.722-.564 5.02-2.27 6.397-4.586 6.643 1.918 13.024 4.942 19.025 8.934-.155.473-.27.964-.35 1.465-8.557 2.602-16.684 6.85-24.132 12.59zM63.51 110.73c.83.522 1.744.92 2.72 1.174.694 5.234 1.7 10.388 3.016 15.44-4.677-1.643-8.967-4.114-12.688-7.24 2.177-3.334 4.502-6.46 6.95-9.374zm52.983-26.94c.295-.004.59-.016.885-.016 1.898 0 3.8.117 5.694.288.193 1.603.303 3.232.303 4.886 0 2.454-.23 4.854-.65 7.19-2.327-3.115-4.784-6.04-7.36-8.753.595-1.09.986-2.304 1.128-3.595zm5.457-5.498c-1.524-.102-3.05-.162-4.572-.162-.652 0-1.303.017-1.952.035-1.637-3.098-4.887-5.212-8.632-5.212-2.27 0-4.356.784-6.014 2.085-6.582-4.397-13.615-7.698-20.942-9.784-.158-2.962-1.63-5.567-3.85-7.25.987-3.267 2.103-6.473 3.358-9.595 1.103-.09 2.215-.15 3.34-.15 18.75 0 34.568 12.75 39.264 30.03zM72.895 49.458c-.797 2.164-1.534 4.363-2.213 6.59-.193-.012-.382-.03-.578-.03-4.28 0-7.907 2.757-9.224 6.59-3.272.002-6.54.26-9.782.73 5.488-6.755 13.093-11.72 21.797-13.88zm-30.897 39.49c0-6.878 1.72-13.36 4.745-19.044 4.578-1.056 9.248-1.624 13.93-1.644.787 3 2.958 5.434 5.797 6.575-.9 6.113-1.376 12.333-1.414 18.582-3.59 1.44-6.126 4.95-6.126 9.054 0 1.406.302 2.738.834 3.94-2.584 3.02-5.03 6.26-7.335 9.71-6.48-7.21-10.436-16.734-10.436-27.17zm40.69 40.688c-2.436 0-4.817-.227-7.136-.64-1.63-5.636-2.852-11.42-3.66-17.315 3.817-1.32 6.56-4.94 6.56-9.21 0-1.74-.46-3.37-1.26-4.783 6.46-4.862 13.437-8.518 20.757-10.858 1.55 3.332 4.92 5.65 8.84 5.65 1.63 0 3.16-.407 4.512-1.114 3.386 3.572 6.56 7.524 9.485 11.836-5.787 15.426-20.68 26.438-38.104 26.438z" id="diagram-network"></path><path d="M66.496 72.76h41.74v41.74h-41.74V72.76zm69.566 0c1.275 0 2.318-1.04 2.318-2.32 0-1.28-1.043-2.318-2.318-2.318h-9.276v-4.638h9.276c1.275 0 2.318-1.038 2.318-2.318s-1.043-2.32-2.318-2.32h-9.276V56.53c0-1.28-1.043-2.32-2.32-2.32h-2.317v-9.274c0-1.28-1.05-2.32-2.32-2.32-1.28 0-2.32 1.04-2.32 2.32v9.275h-4.64V44.94c0-1.28-1.044-2.32-2.32-2.32-1.275 0-2.318 1.04-2.318 2.32v9.275h-4.638v-9.275c0-1.28-1.044-2.32-2.32-2.32-1.274 0-2.318 1.04-2.318 2.32v9.275H94.32v-9.277c0-1.28-1.044-2.32-2.32-2.32-1.275 0-2.318 1.04-2.318 2.32v9.275h-4.638v-9.275c0-1.28-1.04-2.32-2.32-2.32-1.28 0-2.318 1.04-2.318 2.32v9.275H75.77v-9.28c0-1.28-1.04-2.32-2.32-2.32-1.28 0-2.318 1.04-2.318 2.32v9.276h-4.638V44.93c0-1.28-1.038-2.32-2.318-2.32s-2.32 1.04-2.32 2.32v9.275H57.22V44.93c0-1.28-1.04-2.32-2.32-2.32s-2.32 1.04-2.32 2.32v9.274h-2.316c-1.28 0-2.32 1.038-2.32 2.318v2.32H38.67c-1.28 0-2.318 1.038-2.318 2.318s1.038 2.318 2.318 2.318h9.276v4.638H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.318 2.318 2.318h9.276v4.637H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.32 2.318 2.32h9.276v4.64H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.317 2.318 2.317h9.276v4.638H38.67c-1.28 0-2.318 1.044-2.318 2.32 0 1.274 1.038 2.318 2.318 2.318h9.276v4.638H38.67c-1.28 0-2.318 1.045-2.318 2.32 0 1.276 1.038 2.32 2.318 2.32h9.276v4.64H38.67c-1.28 0-2.318 1.04-2.318 2.317 0 1.275 1.038 2.318 2.318 2.318h9.276v4.64H38.67c-1.28 0-2.318 1.043-2.318 2.32 0 1.273 1.038 2.317 2.318 2.317h9.276v2.32c0 1.274 1.04 2.318 2.32 2.318h2.317v9.275c0 1.275 1.04 2.32 2.32 2.32 1.28 0 2.318-1.045 2.318-2.32v-9.275h4.64v9.275c0 1.275 1.04 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.638v9.275c0 1.275 1.04 2.32 2.32 2.32 1.28 0 2.318-1.045 2.318-2.32v-9.275h4.637v9.275c0 1.275 1.04 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.636v9.275c0 1.275 1.042 2.32 2.32 2.32 1.273 0 2.317-1.045 2.317-2.32v-9.275h4.637v9.275c0 1.275 1.045 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.637v9.275c0 1.275 1.044 2.32 2.32 2.32 1.275 0 2.32-1.045 2.32-2.32v-9.275h4.636v9.275c0 1.275 1.045 2.32 2.32 2.32 1.276 0 2.32-1.045 2.32-2.32v-9.275h2.318c1.276 0 2.32-1.044 2.32-2.32v-2.318h9.275c1.274 0 2.317-1.045 2.317-2.32s-1.042-2.32-2.317-2.32h-9.277v-4.64h9.276c1.273 0 2.316-1.04 2.316-2.316 0-1.276-1.042-2.32-2.317-2.32h-9.277v-4.637h9.277c1.276 0 2.32-1.043 2.32-2.32s-1.043-2.32-2.318-2.32h-9.276v-4.637h9.276c1.275 0 2.318-1.044 2.318-2.32 0-1.274-1.042-2.318-2.317-2.318h-9.277V91.31h9.276c1.274 0 2.317-1.038 2.317-2.318s-1.044-2.32-2.32-2.32h-9.275v-4.637h9.276c1.276 0 2.32-1.04 2.32-2.32 0-1.28-1.043-2.318-2.318-2.318h-9.275V72.76h9.276zm-23.19 44.058c0 1.275-1.042 2.318-2.318 2.318H64.178c-1.28 0-2.32-1.043-2.32-2.318V70.44c0-1.28 1.04-2.318 2.32-2.318h46.376c1.276 0 2.32 1.04 2.32 2.32v46.376z" id="diagram-sw"></path><path d="M108.278 65.717c-1.32 0-2.573.21-3.84.388-4.86-8.59-13.847-14.33-24.046-14.33-10.415 0-19.402 5.806-24.194 14.29-1.227-.164-2.452-.348-3.69-.348-15.373 0-27.887 12.506-27.887 27.885 0 15.387 12.52 27.886 27.89 27.886h55.77c15.374 0 27.888-12.5 27.888-27.886 0-15.38-12.514-27.885-27.886-27.885zm0 41.828h-55.77c-7.693 0-13.944-6.256-13.944-13.943 0-7.645 6.766-13.54 13.956-13.752.028 3.29.6 6.516 1.742 9.565l13.06-4.888c-.587-1.544-.872-3.185-.872-4.867 0-7.687 6.25-13.943 13.942-13.943 4.508 0 8.593 2.233 11.152 5.712-6.727 5.09-11.152 13.09-11.152 22.17h13.943c0-7.69 6.25-13.945 13.943-13.945 7.692 0 13.943 6.256 13.943 13.942s-6.25 13.942-13.94 13.942z" fill="#010101" id="diagram-cloud"></path><path d="M124.43 46.652c-.07-2.23-1.943-4.037-4.176-4.037h-9.773s-23.56.524-31.42.52c-7.19-.007-28.754-.52-28.754-.52H40.53c-2.232 0-4.107 1.808-4.176 4.037-.072 2.237 1.698 4.06 3.944 4.06h3.058c.963 5.987 8.793 54.57 12.148 71.708.53 2.7 2.134 5.85 4.943 6.154 1.506.39 8.56 2.073 18.68 2.073 10.334 0 19.235-1.746 20.77-2.064 2.85-.247 4.49-3.428 5.034-6.153 3.438-17.2 11.51-65.79 12.498-71.716h3.063c2.244 0 4.015-1.825 3.944-4.062zm-20.523 4.222l-2.05 2.724c-.75-.87-1.502-1.753-2.253-2.643l4.303-.08zm-12.307.683c2.02 2.61 4.058 5.132 6.112 7.57l-1.15 1.538c-2.04 2.727-4.073 5.447-6.118 8.137-2.157-2.592-4.215-5.198-6.17-7.768 2.412-3.004 4.852-6.16 7.326-9.477zm-15.54 34.86c-2.182 2.406-4.413 4.72-6.708 6.92-2.328-2.552-4.628-5.175-6.9-7.87 2.314-2.21 4.54-4.498 6.68-6.828 2.232 2.623 4.543 5.222 6.927 7.772zM73.79 73.36l.343-.407c2.064-2.28 4.14-4.662 6.233-7.156 2.113 2.52 4.212 4.93 6.298 7.232l.274.322c-2.16 2.77-4.348 5.485-6.572 8.12-2.227-2.634-4.414-5.348-6.575-8.117zm6.575 17.51c2.29 2.292 4.642 4.53 7.07 6.69-2.33 2.443-4.686 4.817-7.07 7.124-2.386-2.307-4.744-4.68-7.073-7.122 2.427-2.16 4.78-4.4 7.073-6.693zm4.307-4.455c2.384-2.55 4.695-5.15 6.928-7.777 2.138 2.328 4.364 4.616 6.676 6.827-2.27 2.693-4.57 5.315-6.898 7.867-2.295-2.198-4.526-4.512-6.706-6.918zm-6.197-35.18c1.35.003 3.137-.01 5.18-.032-.433.607-.862 1.205-1.288 1.794-.65.91-1.32 1.838-2 2.773-.68-.934-1.354-1.862-2.005-2.772-.42-.58-.842-1.17-1.27-1.766.503.003.968.005 1.383.005zm-9.343.32c2.476 3.32 4.915 6.474 7.324 9.478-1.954 2.57-4.013 5.177-6.17 7.77-2.046-2.69-4.08-5.412-6.118-8.14l-1.15-1.536c2.056-2.437 4.095-4.958 6.114-7.57zm-8.026-.58c-.745.883-1.49 1.758-2.236 2.622l-2.037-2.71c1.34.03 2.784.058 4.273.088zm-11.916 1.44c1.532 2.195 3.127 4.446 4.774 6.727-1.032 1.138-2.064 2.257-3.098 3.362-.705-4.22-1.285-7.723-1.676-10.09zm5.02 32.85l-.425-2.327.97 1.715-.545.612zm-1.936-14.358c1.956-1.977 3.897-4.02 5.82-6.142 2.334 3.113 4.77 6.257 7.31 9.386-2.254 2.36-4.502 4.596-6.752 6.718-2.023-2.507-6.253-9.216-6.378-9.957zm5.49 31.98c-.65-3.675-1.324-7.556-2-11.478.637-.528 1.27-1.05 1.895-1.59 2.34 2.662 4.72 5.22 7.102 7.67-2.257 1.92-4.588 3.723-7.002 5.393zm3.975 17.767s-.3.398-.57.68c-.02-.08-.04-.155-.054-.23-.383-1.906-.824-4.226-1.31-6.846 1.537 1.445 3.086 2.87 4.647 4.275-.92.724-1.83 1.432-2.72 2.12zm4.81 2.96c.64-.505 1.28-1.013 1.92-1.526.8.696 1.6 1.39 2.41 2.077-1.64-.163-3.09-.356-4.33-.552zm2.64-8.853c-2.62-2.53-5.198-5.112-7.738-7.752 2.49-1.76 4.91-3.618 7.27-5.55 2.535 2.473 5.067 4.83 7.573 7.076-1.767 1.633-3.55 3.23-5.345 4.79-.592.486-1.18.967-1.765 1.442zm11.7 9.8c-.346.007-.695.01-1.044.015-2.32-2.03-4.614-4.1-6.876-6.213.758-.644 1.514-1.293 2.267-1.95 1.683-1.382 3.393-2.82 5.125-4.305 1.745 1.5 3.47 2.947 5.166 4.342.74.642 1.48 1.277 2.223 1.91-2.256 2.107-4.543 4.172-6.86 6.2zm9.22-.62c.72-.61 1.433-1.23 2.147-1.85.566.458 1.135.91 1.705 1.36-1.136.165-2.432.335-3.85.49zm1.424-9.176c-.57-.46-1.146-.93-1.722-1.406-1.808-1.573-3.604-3.178-5.383-4.823 2.505-2.244 5.036-4.602 7.57-7.074 2.36 1.93 4.78 3.79 7.27 5.55-2.54 2.64-5.117 5.226-7.734 7.755zm7.786 6.315c-.185-.22-.334-.42-.334-.42-.893-.69-1.8-1.397-2.72-2.12 1.452-1.308 2.896-2.633 4.327-3.976-.47 2.48-.9 4.687-1.273 6.514zm3.456-18.32c-2.348-1.633-4.617-3.394-6.815-5.266 2.386-2.45 4.764-5.003 7.11-7.67.58.5 1.167.99 1.757 1.48-.694 3.913-1.385 7.784-2.05 11.457zm3.096-17.49l-.545-.613.97-1.715-.425 2.328zm-3.8-4.402c-2.25-2.122-4.497-4.356-6.75-6.71 2.54-3.13 4.977-6.276 7.312-9.39 1.906 2.105 3.83 4.13 5.77 6.092-.138.793-4.34 7.536-6.333 10.006zm7.775-18.37c-1.03-1.102-2.058-2.216-3.085-3.35 1.666-2.303 3.276-4.577 4.823-6.794-.405 2.366-1.008 5.89-1.74 10.144z" id="diagram-bin"></path><path d="M114.31 61.395L98.25 45.298c-1.713-1.717-4.04-2.683-6.465-2.683h-46.3c-5.044 0-9.133 4.09-9.133 9.133v72.49c0 5.044 4.09 9.133 9.132 9.133h62.36c5.043 0 9.133-4.084 9.133-9.13V67.848c-.002-2.418-.96-4.737-2.667-6.45zm-6.467 62.844h-62.36V51.743h46.303l16.058 16.098v56.393zM54.875 55.475c-2.522 0-4.566 2.045-4.566 4.566V72.03c0 2.522 2.04 4.567 4.56 4.567 2.523 0 4.567-2.045 4.567-4.567V60.043c0-2.52-2.044-4.566-4.566-4.566zm13.89 0c-2.522 0-4.567 2.045-4.567 4.566V72.03c0 2.522 2.045 4.567 4.567 4.567 2.522 0 4.566-2.045 4.566-4.567V60.043c0-2.52-2.04-4.566-4.56-4.566zm13.888 0c-2.52 0-4.566 2.045-4.566 4.566V72.03c0 2.522 2.045 4.567 4.566 4.567 2.522 0 4.567-2.045 4.567-4.567V60.043c0-2.52-2.045-4.566-4.567-4.566zm13.89 21.12c2.522 0 4.567-2.044 4.567-4.566v-3.99c0-2.522-2.045-4.567-4.567-4.567-2.522 0-4.566 2.045-4.566 4.567v3.995c0 2.524 2.044 4.57 4.566 4.57z" id="diagram-cache"></path><path d="M127.128 135.19H36.996V45.056h90.132v90.132zm-82.774-7.36h75.416V52.416H44.354v75.416zm20.233-53.342h7.358v57.022h-7.358zM40.675 68.97h82.774v7.357H40.67zM66.427 98.4h57.022v7.358H66.422z" id="diagram-template"></path><path d="M36.352 68.593v55.405c0 7.533 6.1 13.633 13.627 13.633h64.15c7.532 0 13.64-6.094 13.64-13.63V68.595c0-7.523-6.107-13.626-13.64-13.626h-2.796v-8.202c0-2.293-1.86-4.15-4.15-4.15s-4.155 1.857-4.155 4.15v16.7c0 2.05-1.657 3.705-3.703 3.705-2.037 0-3.687-1.656-3.687-3.704v-8.5h-7.19v-8.2c0-2.294-1.86-4.15-4.15-4.15-2.3 0-4.15 1.856-4.15 4.15v16.7c0 2.048-1.65 3.704-3.703 3.704-2.037 0-3.688-1.658-3.688-3.706v-8.5h-7.1v-8.2c0-2.294-1.865-4.15-4.15-4.15-2.3 0-4.156 1.856-4.156 4.15v16.7c0 2.048-1.652 3.704-3.7 3.704-2.042 0-3.693-1.657-3.693-3.705v-8.5c-7.515.01-13.61 6.105-13.61 13.627zm81.503 53.72c0 2.425-1.966 4.39-4.39 4.39h-62.23c-2.424 0-4.395-1.965-4.395-4.39v-35.72h71.015v35.723zm-4.947-29.247v5.54h-3.218v22.145h-5.42V98.61h-3.207v-5.54h11.845m-13.08 0v27.685h-4.752l-2.82-12.585v12.586h-4.53v-27.69h4.53l3.04 12.467V93.066h4.53m-23.07 0h9.037v5.54h-3.618v5.25h3.387v5.267h-3.387v6.087h3.98v5.54h-9.4V93.067m-.927 0l-2.755 27.685h-8.228l-3.128-27.684h5.716c.66 7.626 1.133 14.073 1.417 19.34.283-5.324.58-10.055.888-14.193l.373-5.147h5.72m-23.843 0h9.04v5.54h-3.62v5.25h3.387v5.267H57.41v6.087h3.977v5.54h-9.4V93.067" id="diagram-event"></path></defs></svg>
+<svg class="diagram-defs"><defs><path d="M125.558 122.652V76.668c0-2.123-1.72-3.844-3.843-3.844l-38.2 23.772 42.043 26.056zM39.07 72.825c-2.122 0-3.843 1.72-3.843 3.844v49.964c0 2.123 1.72 3.846 3.844 3.846h82.65c2.122 0 3.842-1.722 3.842-3.845l-86.49-53.81zm59.67-11.272c-1.97 7.728-8.96 13.45-17.303 13.45-8.342 0-15.33-5.723-17.3-13.45H43.614v10.294L80.26 94.393l36.804-21.83v-11.01H98.74zM81.437 42.78c-7.924 0-14.346 6.42-14.346 14.346 0 7.925 6.427 14.35 14.35 14.35s14.35-6.425 14.35-14.35S89.36 42.78 81.44 42.78zm1.85 22.158H80.08V53.813h-3.137v-2.09h.29c1.068 0 1.91-.202 2.527-.603.615-.4 1.003-1.046 1.167-1.935h2.36v15.753z" id="diagram-notification"></path><path d="M105.74 133.947l-12.07-5.73c-1.36-.644-2.184-1.647-2.184-3.043v-.358c0-1.396.823-2.4 2.184-3.044l12.07-5.73c.427-.214.82-.357 1.324-.357 1.146-.035 2.184.967 2.184 2.256 0 1.04-.573 1.76-1.504 2.19l-10.814 4.83 10.814 4.834c.93.43 1.504 1.253 1.504 2.256 0 1.325-1.038 2.256-2.365 2.22-.392 0-.786-.143-1.144-.323zm6.803 5.373l14.002-29.257c.394-.823 1.038-1.253 1.898-1.253 1.146 0 2.112.967 2.112 2.04 0 .395-.143.79-.25 1.04l-14.002 29.255c-.394.823-1.038 1.253-1.898 1.253-1.146 0-2.112-.966-2.112-2.04 0-.395.142-.788.25-1.04zm25.067-23.277l12.067 5.73c1.36.644 2.184 1.647 2.184 3.043v.358c0 1.396-.82 2.4-2.18 3.043l-12.07 5.73c-.43.215-.82.358-1.323.358-1.146.035-2.184-.967-2.184-2.256 0-1.04.574-1.76 1.505-2.19l10.814-4.834-10.814-4.835c-.93-.43-1.504-1.252-1.504-2.255 0-1.326 1.04-2.257 2.365-2.22.392 0 .786.143 1.144.322zm31.91-27.436c0-1.866-1.513-3.377-3.38-3.377H76.08c-1.865 0-3.377 1.51-3.377 3.377v66.42c0 1.865 1.512 3.377 3.377 3.377h90.06c1.867 0 3.38-1.512 3.38-3.377v-66.42zm-74.865-.188c1.347 0 2.44 1.09 2.44 2.434s-1.092 2.44-2.44 2.44c-1.347 0-2.44-1.092-2.44-2.44 0-1.347 1.094-2.44 2.44-2.44zm-6.754 0c1.35 0 2.44 1.09 2.44 2.434s-1.09 2.44-2.44 2.44c-1.343 0-2.44-1.092-2.44-2.44 0-1.347 1.098-2.44 2.44-2.44zm-6.75 0c1.347 0 2.44 1.09 2.44 2.434s-1.092 2.44-2.44 2.44c-1.347 0-2.44-1.092-2.44-2.44 0-1.347 1.094-2.44 2.44-2.44zm83.87 65.48H77.21V97.61h87.81v56.29z" id="diagram-page"></path><path d="M82.687 42.615c-2.388 0-4.733.18-7.023.53l-.2-.09c-.02.044-.034.09-.054.13-22.133 3.493-39.058 22.648-39.058 45.76 0 25.59 20.744 46.334 46.334 46.334 25.588 0 46.333-20.748 46.333-46.338 0-25.587-20.748-46.33-46.337-46.33zm-9.65 51.123c-.73-.364-1.508-.646-2.328-.818.06-5.917.52-11.804 1.384-17.586 2.722-.564 5.02-2.27 6.397-4.586 6.643 1.918 13.024 4.942 19.025 8.934-.155.473-.27.964-.35 1.465-8.557 2.602-16.684 6.85-24.132 12.59zM63.51 110.73c.83.522 1.744.92 2.72 1.174.694 5.234 1.7 10.388 3.016 15.44-4.677-1.643-8.967-4.114-12.688-7.24 2.177-3.334 4.502-6.46 6.95-9.374zm52.983-26.94c.295-.004.59-.016.885-.016 1.898 0 3.8.117 5.694.288.193 1.603.303 3.232.303 4.886 0 2.454-.23 4.854-.65 7.19-2.327-3.115-4.784-6.04-7.36-8.753.595-1.09.986-2.304 1.128-3.595zm5.457-5.498c-1.524-.102-3.05-.162-4.572-.162-.652 0-1.303.017-1.952.035-1.637-3.098-4.887-5.212-8.632-5.212-2.27 0-4.356.784-6.014 2.085-6.582-4.397-13.615-7.698-20.942-9.784-.158-2.962-1.63-5.567-3.85-7.25.987-3.267 2.103-6.473 3.358-9.595 1.103-.09 2.215-.15 3.34-.15 18.75 0 34.568 12.75 39.264 30.03zM72.895 49.458c-.797 2.164-1.534 4.363-2.213 6.59-.193-.012-.382-.03-.578-.03-4.28 0-7.907 2.757-9.224 6.59-3.272.002-6.54.26-9.782.73 5.488-6.755 13.093-11.72 21.797-13.88zm-30.897 39.49c0-6.878 1.72-13.36 4.745-19.044 4.578-1.056 9.248-1.624 13.93-1.644.787 3 2.958 5.434 5.797 6.575-.9 6.113-1.376 12.333-1.414 18.582-3.59 1.44-6.126 4.95-6.126 9.054 0 1.406.302 2.738.834 3.94-2.584 3.02-5.03 6.26-7.335 9.71-6.48-7.21-10.436-16.734-10.436-27.17zm40.69 40.688c-2.436 0-4.817-.227-7.136-.64-1.63-5.636-2.852-11.42-3.66-17.315 3.817-1.32 6.56-4.94 6.56-9.21 0-1.74-.46-3.37-1.26-4.783 6.46-4.862 13.437-8.518 20.757-10.858 1.55 3.332 4.92 5.65 8.84 5.65 1.63 0 3.16-.407 4.512-1.114 3.386 3.572 6.56 7.524 9.485 11.836-5.787 15.426-20.68 26.438-38.104 26.438z" id="diagram-network"></path><path d="M66.496 72.76h41.74v41.74h-41.74V72.76zm69.566 0c1.275 0 2.318-1.04 2.318-2.32 0-1.28-1.043-2.318-2.318-2.318h-9.276v-4.638h9.276c1.275 0 2.318-1.038 2.318-2.318s-1.043-2.32-2.318-2.32h-9.276V56.53c0-1.28-1.043-2.32-2.32-2.32h-2.317v-9.274c0-1.28-1.05-2.32-2.32-2.32-1.28 0-2.32 1.04-2.32 2.32v9.275h-4.64V44.94c0-1.28-1.044-2.32-2.32-2.32-1.275 0-2.318 1.04-2.318 2.32v9.275h-4.638v-9.275c0-1.28-1.044-2.32-2.32-2.32-1.274 0-2.318 1.04-2.318 2.32v9.275H94.32v-9.277c0-1.28-1.044-2.32-2.32-2.32-1.275 0-2.318 1.04-2.318 2.32v9.275h-4.638v-9.275c0-1.28-1.04-2.32-2.32-2.32-1.28 0-2.318 1.04-2.318 2.32v9.275H75.77v-9.28c0-1.28-1.04-2.32-2.32-2.32-1.28 0-2.318 1.04-2.318 2.32v9.276h-4.638V44.93c0-1.28-1.038-2.32-2.318-2.32s-2.32 1.04-2.32 2.32v9.275H57.22V44.93c0-1.28-1.04-2.32-2.32-2.32s-2.32 1.04-2.32 2.32v9.274h-2.316c-1.28 0-2.32 1.038-2.32 2.318v2.32H38.67c-1.28 0-2.318 1.038-2.318 2.318s1.038 2.318 2.318 2.318h9.276v4.638H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.318 2.318 2.318h9.276v4.637H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.32 2.318 2.32h9.276v4.64H38.67c-1.28 0-2.318 1.04-2.318 2.32 0 1.28 1.038 2.317 2.318 2.317h9.276v4.638H38.67c-1.28 0-2.318 1.044-2.318 2.32 0 1.274 1.038 2.318 2.318 2.318h9.276v4.638H38.67c-1.28 0-2.318 1.045-2.318 2.32 0 1.276 1.038 2.32 2.318 2.32h9.276v4.64H38.67c-1.28 0-2.318 1.04-2.318 2.317 0 1.275 1.038 2.318 2.318 2.318h9.276v4.64H38.67c-1.28 0-2.318 1.043-2.318 2.32 0 1.273 1.038 2.317 2.318 2.317h9.276v2.32c0 1.274 1.04 2.318 2.32 2.318h2.317v9.275c0 1.275 1.04 2.32 2.32 2.32 1.28 0 2.318-1.045 2.318-2.32v-9.275h4.64v9.275c0 1.275 1.04 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.638v9.275c0 1.275 1.04 2.32 2.32 2.32 1.28 0 2.318-1.045 2.318-2.32v-9.275h4.637v9.275c0 1.275 1.04 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.636v9.275c0 1.275 1.042 2.32 2.32 2.32 1.273 0 2.317-1.045 2.317-2.32v-9.275h4.637v9.275c0 1.275 1.045 2.32 2.32 2.32s2.32-1.045 2.32-2.32v-9.275h4.637v9.275c0 1.275 1.044 2.32 2.32 2.32 1.275 0 2.32-1.045 2.32-2.32v-9.275h4.636v9.275c0 1.275 1.045 2.32 2.32 2.32 1.276 0 2.32-1.045 2.32-2.32v-9.275h2.318c1.276 0 2.32-1.044 2.32-2.32v-2.318h9.275c1.274 0 2.317-1.045 2.317-2.32s-1.042-2.32-2.317-2.32h-9.277v-4.64h9.276c1.273 0 2.316-1.04 2.316-2.316 0-1.276-1.042-2.32-2.317-2.32h-9.277v-4.637h9.277c1.276 0 2.32-1.043 2.32-2.32s-1.043-2.32-2.318-2.32h-9.276v-4.637h9.276c1.275 0 2.318-1.044 2.318-2.32 0-1.274-1.042-2.318-2.317-2.318h-9.277V91.31h9.276c1.274 0 2.317-1.038 2.317-2.318s-1.044-2.32-2.32-2.32h-9.275v-4.637h9.276c1.276 0 2.32-1.04 2.32-2.32 0-1.28-1.043-2.318-2.318-2.318h-9.275V72.76h9.276zm-23.19 44.058c0 1.275-1.042 2.318-2.318 2.318H64.178c-1.28 0-2.32-1.043-2.32-2.318V70.44c0-1.28 1.04-2.318 2.32-2.318h46.376c1.276 0 2.32 1.04 2.32 2.32v46.376z" id="diagram-sw"></path><path d="M108.278 65.717c-1.32 0-2.573.21-3.84.388-4.86-8.59-13.847-14.33-24.046-14.33-10.415 0-19.402 5.806-24.194 14.29-1.227-.164-2.452-.348-3.69-.348-15.373 0-27.887 12.506-27.887 27.885 0 15.387 12.52 27.886 27.89 27.886h55.77c15.374 0 27.888-12.5 27.888-27.886 0-15.38-12.514-27.885-27.886-27.885zm0 41.828h-55.77c-7.693 0-13.944-6.256-13.944-13.943 0-7.645 6.766-13.54 13.956-13.752.028 3.29.6 6.516 1.742 9.565l13.06-4.888c-.587-1.544-.872-3.185-.872-4.867 0-7.687 6.25-13.943 13.942-13.943 4.508 0 8.593 2.233 11.152 5.712-6.727 5.09-11.152 13.09-11.152 22.17h13.943c0-7.69 6.25-13.945 13.943-13.945 7.692 0 13.943 6.256 13.943 13.942s-6.25 13.942-13.94 13.942z" id="diagram-cloud"></path><path d="M124.43 46.652c-.07-2.23-1.943-4.037-4.176-4.037h-9.773s-23.56.524-31.42.52c-7.19-.007-28.754-.52-28.754-.52H40.53c-2.232 0-4.107 1.808-4.176 4.037-.072 2.237 1.698 4.06 3.944 4.06h3.058c.963 5.987 8.793 54.57 12.148 71.708.53 2.7 2.134 5.85 4.943 6.154 1.506.39 8.56 2.073 18.68 2.073 10.334 0 19.235-1.746 20.77-2.064 2.85-.247 4.49-3.428 5.034-6.153 3.438-17.2 11.51-65.79 12.498-71.716h3.063c2.244 0 4.015-1.825 3.944-4.062zm-20.523 4.222l-2.05 2.724c-.75-.87-1.502-1.753-2.253-2.643l4.303-.08zm-12.307.683c2.02 2.61 4.058 5.132 6.112 7.57l-1.15 1.538c-2.04 2.727-4.073 5.447-6.118 8.137-2.157-2.592-4.215-5.198-6.17-7.768 2.412-3.004 4.852-6.16 7.326-9.477zm-15.54 34.86c-2.182 2.406-4.413 4.72-6.708 6.92-2.328-2.552-4.628-5.175-6.9-7.87 2.314-2.21 4.54-4.498 6.68-6.828 2.232 2.623 4.543 5.222 6.927 7.772zM73.79 73.36l.343-.407c2.064-2.28 4.14-4.662 6.233-7.156 2.113 2.52 4.212 4.93 6.298 7.232l.274.322c-2.16 2.77-4.348 5.485-6.572 8.12-2.227-2.634-4.414-5.348-6.575-8.117zm6.575 17.51c2.29 2.292 4.642 4.53 7.07 6.69-2.33 2.443-4.686 4.817-7.07 7.124-2.386-2.307-4.744-4.68-7.073-7.122 2.427-2.16 4.78-4.4 7.073-6.693zm4.307-4.455c2.384-2.55 4.695-5.15 6.928-7.777 2.138 2.328 4.364 4.616 6.676 6.827-2.27 2.693-4.57 5.315-6.898 7.867-2.295-2.198-4.526-4.512-6.706-6.918zm-6.197-35.18c1.35.003 3.137-.01 5.18-.032-.433.607-.862 1.205-1.288 1.794-.65.91-1.32 1.838-2 2.773-.68-.934-1.354-1.862-2.005-2.772-.42-.58-.842-1.17-1.27-1.766.503.003.968.005 1.383.005zm-9.343.32c2.476 3.32 4.915 6.474 7.324 9.478-1.954 2.57-4.013 5.177-6.17 7.77-2.046-2.69-4.08-5.412-6.118-8.14l-1.15-1.536c2.056-2.437 4.095-4.958 6.114-7.57zm-8.026-.58c-.745.883-1.49 1.758-2.236 2.622l-2.037-2.71c1.34.03 2.784.058 4.273.088zm-11.916 1.44c1.532 2.195 3.127 4.446 4.774 6.727-1.032 1.138-2.064 2.257-3.098 3.362-.705-4.22-1.285-7.723-1.676-10.09zm5.02 32.85l-.425-2.327.97 1.715-.545.612zm-1.936-14.358c1.956-1.977 3.897-4.02 5.82-6.142 2.334 3.113 4.77 6.257 7.31 9.386-2.254 2.36-4.502 4.596-6.752 6.718-2.023-2.507-6.253-9.216-6.378-9.957zm5.49 31.98c-.65-3.675-1.324-7.556-2-11.478.637-.528 1.27-1.05 1.895-1.59 2.34 2.662 4.72 5.22 7.102 7.67-2.257 1.92-4.588 3.723-7.002 5.393zm3.975 17.767s-.3.398-.57.68c-.02-.08-.04-.155-.054-.23-.383-1.906-.824-4.226-1.31-6.846 1.537 1.445 3.086 2.87 4.647 4.275-.92.724-1.83 1.432-2.72 2.12zm4.81 2.96c.64-.505 1.28-1.013 1.92-1.526.8.696 1.6 1.39 2.41 2.077-1.64-.163-3.09-.356-4.33-.552zm2.64-8.853c-2.62-2.53-5.198-5.112-7.738-7.752 2.49-1.76 4.91-3.618 7.27-5.55 2.535 2.473 5.067 4.83 7.573 7.076-1.767 1.633-3.55 3.23-5.345 4.79-.592.486-1.18.967-1.765 1.442zm11.7 9.8c-.346.007-.695.01-1.044.015-2.32-2.03-4.614-4.1-6.876-6.213.758-.644 1.514-1.293 2.267-1.95 1.683-1.382 3.393-2.82 5.125-4.305 1.745 1.5 3.47 2.947 5.166 4.342.74.642 1.48 1.277 2.223 1.91-2.256 2.107-4.543 4.172-6.86 6.2zm9.22-.62c.72-.61 1.433-1.23 2.147-1.85.566.458 1.135.91 1.705 1.36-1.136.165-2.432.335-3.85.49zm1.424-9.176c-.57-.46-1.146-.93-1.722-1.406-1.808-1.573-3.604-3.178-5.383-4.823 2.505-2.244 5.036-4.602 7.57-7.074 2.36 1.93 4.78 3.79 7.27 5.55-2.54 2.64-5.117 5.226-7.734 7.755zm7.786 6.315c-.185-.22-.334-.42-.334-.42-.893-.69-1.8-1.397-2.72-2.12 1.452-1.308 2.896-2.633 4.327-3.976-.47 2.48-.9 4.687-1.273 6.514zm3.456-18.32c-2.348-1.633-4.617-3.394-6.815-5.266 2.386-2.45 4.764-5.003 7.11-7.67.58.5 1.167.99 1.757 1.48-.694 3.913-1.385 7.784-2.05 11.457zm3.096-17.49l-.545-.613.97-1.715-.425 2.328zm-3.8-4.402c-2.25-2.122-4.497-4.356-6.75-6.71 2.54-3.13 4.977-6.276 7.312-9.39 1.906 2.105 3.83 4.13 5.77 6.092-.138.793-4.34 7.536-6.333 10.006zm7.775-18.37c-1.03-1.102-2.058-2.216-3.085-3.35 1.666-2.303 3.276-4.577 4.823-6.794-.405 2.366-1.008 5.89-1.74 10.144z" id="diagram-bin"></path><path d="M114.31 61.395L98.25 45.298c-1.713-1.717-4.04-2.683-6.465-2.683h-46.3c-5.044 0-9.133 4.09-9.133 9.133v72.49c0 5.044 4.09 9.133 9.132 9.133h62.36c5.043 0 9.133-4.084 9.133-9.13V67.848c-.002-2.418-.96-4.737-2.667-6.45zm-6.467 62.844h-62.36V51.743h46.303l16.058 16.098v56.393zM54.875 55.475c-2.522 0-4.566 2.045-4.566 4.566V72.03c0 2.522 2.04 4.567 4.56 4.567 2.523 0 4.567-2.045 4.567-4.567V60.043c0-2.52-2.044-4.566-4.566-4.566zm13.89 0c-2.522 0-4.567 2.045-4.567 4.566V72.03c0 2.522 2.045 4.567 4.567 4.567 2.522 0 4.566-2.045 4.566-4.567V60.043c0-2.52-2.04-4.566-4.56-4.566zm13.888 0c-2.52 0-4.566 2.045-4.566 4.566V72.03c0 2.522 2.045 4.567 4.566 4.567 2.522 0 4.567-2.045 4.567-4.567V60.043c0-2.52-2.045-4.566-4.567-4.566zm13.89 21.12c2.522 0 4.567-2.044 4.567-4.566v-3.99c0-2.522-2.045-4.567-4.567-4.567-2.522 0-4.566 2.045-4.566 4.567v3.995c0 2.524 2.044 4.57 4.566 4.57z" id="diagram-cache"></path><path d="M127.128 135.19H36.996V45.056h90.132v90.132zm-82.774-7.36h75.416V52.416H44.354v75.416zm20.233-53.342h7.358v57.022h-7.358zM40.675 68.97h82.774v7.357H40.67zM66.427 98.4h57.022v7.358H66.422z" id="diagram-template"></path><path d="M36.352 68.593v55.405c0 7.533 6.1 13.633 13.627 13.633h64.15c7.532 0 13.64-6.094 13.64-13.63V68.595c0-7.523-6.107-13.626-13.64-13.626h-2.796v-8.202c0-2.293-1.86-4.15-4.15-4.15s-4.155 1.857-4.155 4.15v16.7c0 2.05-1.657 3.705-3.703 3.705-2.037 0-3.687-1.656-3.687-3.704v-8.5h-7.19v-8.2c0-2.294-1.86-4.15-4.15-4.15-2.3 0-4.15 1.856-4.15 4.15v16.7c0 2.048-1.65 3.704-3.703 3.704-2.037 0-3.688-1.658-3.688-3.706v-8.5h-7.1v-8.2c0-2.294-1.865-4.15-4.15-4.15-2.3 0-4.156 1.856-4.156 4.15v16.7c0 2.048-1.652 3.704-3.7 3.704-2.042 0-3.693-1.657-3.693-3.705v-8.5c-7.515.01-13.61 6.105-13.61 13.627zm81.503 53.72c0 2.425-1.966 4.39-4.39 4.39h-62.23c-2.424 0-4.395-1.965-4.395-4.39v-35.72h71.015v35.723zm-4.947-29.247v5.54h-3.218v22.145h-5.42V98.61h-3.207v-5.54h11.845m-13.08 0v27.685h-4.752l-2.82-12.585v12.586h-4.53v-27.69h4.53l3.04 12.467V93.066h4.53m-23.07 0h9.037v5.54h-3.618v5.25h3.387v5.267h-3.387v6.087h3.98v5.54h-9.4V93.067m-.927 0l-2.755 27.685h-8.228l-3.128-27.684h5.716c.66 7.626 1.133 14.073 1.417 19.34.283-5.324.58-10.055.888-14.193l.373-5.147h5.72m-23.843 0h9.04v5.54h-3.62v5.25h3.387v5.267H57.41v6.087h3.977v5.54h-9.4V93.067" id="diagram-event"></path></defs></svg>
 
 </body>
 </html>
