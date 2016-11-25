@@ -40,8 +40,8 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
         <div class='conf-logo'>
-          <img src='lib/img/dfua-logo-white.png' class='conf-logo-white'/>
-          <img src='lib/img/dfua-logo-light.png' class='conf-logo-color'/>
+          <img src='lib/img/dfpl-logo-white.png' class='conf-logo-white'/>
+          <img src='lib/img/dfpl-logo-light.png' class='conf-logo-color'/>
         </div>
 
         <section class="slide">
@@ -60,7 +60,6 @@
 
         <section data-background="#c5dedf">
             <img height="600" data-src="lib/img/brainly-com.png" alt="Brainly.com" class="clean"/>
-            <img height="600" data-src="lib/img/znanija-com.png" alt="Znanija.com" class="clean fragment" style='position: absolute;right: 0; top: 150px'/>
         </section>
 
         <section data-background="#D5D8E8">
@@ -99,6 +98,15 @@
             <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
 
+        <section class="diagram-container"  data-fragment-callback="diagramNextStep">
+            <h2>Cache, falling back to network</h2>
+            <!-- Ideal for: If you're building offline-first, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request. -->
+
+            <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache" width="549.929" height="342.978" transform="translate(461.439 210.129)"></use><text x="400.625" y="253.272" class="label">Network</text><use transform="translate(317.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network"></use><g class="anim sequence"><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56" ></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002" ></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)" >1</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315" ></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692" ></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)" >2</text></g><g class="anim" data-time-padding="0.6" ><g class="cross" ><path d="M487.304 315.19l18.813 19.955" ></path><path d="M503.267 312.91l-14.252 23.375" ></path></g></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M306.297 294.13c41.367 4.712 30.642-61.09 53.737-84.936" ></path><path d="M350.672 212.27l10.33-5.536-.98 12.597" ></path></g><text class="fade-in state-label" y="93.136" x="140.753" transform="translate(-33.772 202.062) translate(220 -30)" >3</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377" ></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712" ></path></g><g class="joiner"><path d="M450 172c50 26 155 24 100 70"></path><path d="M551 234l-5 10 15 -3"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text><text x="395" y="120" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text></g></g></g></svg>
+
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
+        </section>
+
         <section>
             <h2>Registration</h2>
 
@@ -128,9 +136,9 @@ navigator.serviceWorker.register('/worker.js')<div class="fragment">  .then( swR
             <h2>URL object</h2>
 
             <pre><code data-trim data-noescape>
-const url = new URL("https://example.com/api/search?query='dfua'");
+const url = new URL("https://example.com/api/search?query='dfpl'");
 <div class="fragment">if (url.hostname === 'example.com'
-    || url.pathname.includes('/api/') 
+    || url.pathname.includes('/api/')
     || url.searchParams.has('query')) {
     //...
 }
@@ -151,7 +159,7 @@ fetch("https://example.com/data.json")
             </code></pre>
 
             <pre class="fragment"><code data-trim data-noescape>
-const request = new Request("https://example.com/endpoint", {<div class="fragment">    method: "POST",</div><div class="fragment">    headers: customHeaders,</div><div class="fragment">    body: '{"conf":"dfua"}'</div>});
+const request = new Request("https://example.com/endpoint", {<div class="fragment">    method: "POST",</div><div class="fragment">    headers: customHeaders,</div><div class="fragment">    body: '{"conf":"dfpl"}'</div>});
 
 fetch(request).then(processResponse);
             </code></pre>
@@ -170,18 +178,8 @@ caches.open('cache-v1').then(cache => {<div class="fragment">    cache.put(reque
 }).catch(err => console.error(err));</code></pre>
         </section>
 
-
-    <section class="diagram-container"  data-fragment-callback="diagramNextStep">
-        <h2>Cache, falling back to network</h2>
-        <!-- Ideal for: If you're building offline-first, this is how you'll handle the majority of requests. Other patterns will be exceptions based on the incoming request. -->
-
-        <svg viewBox="0 0 549.92853 265"><g transform="translate(-36.352 -120.593)"><text x="248.603" y="384.105" class="label">ServiceWorker</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use><text x="89.548" y="252.972" class="label">Page</text><use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use><text x="537.439" y="383.491" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache" width="549.929" height="342.978" transform="translate(461.439 210.129)"></use><text x="400.625" y="253.272" class="label">Network</text><use transform="translate(317.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network"></use><g class="anim sequence"><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56" ></path><path d="M177.64 287.113l10.897 5.65-10.857 5.002" ></path></g><text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)" >1</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315" ></path><path d="M477.033 324.593l15.393 1.14-11.972 9.692" ></path></g><text x="215.445" y="131.329" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)" >2</text></g><g class="anim" data-time-padding="0.6" ><g class="cross" ><path d="M487.304 315.19l18.813 19.955" ></path><path d="M503.267 312.91l-14.252 23.375" ></path></g></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M306.297 294.13c41.367 4.712 30.642-61.09 53.737-84.936" ></path><path d="M350.672 212.27l10.33-5.536-.98 12.597" ></path></g><text class="fade-in state-label" y="93.136" x="140.753" transform="translate(-33.772 202.062) translate(220 -30)" >3</text></g><g class="anim" data-time-padding="0.6" ><g class="joiner" ><path d="M349.054 172.7c-48.11-26.075-154.585-24.56-198.804-3.377" ></path><path d="M156.36 160.117l-9.12 9.69 11.97 1.712" ></path></g><g class="joiner"><path d="M450 172c50 26 155 24 100 70"></path><path d="M551 234l-5 10 15 -3"></path></g><text x="145.324" y="91.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text><text x="395" y="120" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)" >4</text></g></g></g></svg>
-
-        <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-    </section>
-
         <section>
-            <h2>Putting it all togheter</h2>
+            <h2>Putting it all together</h2>
 
             <svg style="width: 100px; height: 100px">
                 <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
@@ -228,14 +226,14 @@ self.addEventListener('fetch', event => {<div class='fragment'>  const url = new
 
         <section class="diagram-container" data-state="sw_demo"  data-fragment-callback="diagramNextStep">
             <h2>Generic fallback</h2>
-            <svg viewBox="0 0 549.92853 265"> <g transform="translate(-36.352 -120.593)"> <text x="248.603" y="384.105" class="label">ServiceWorker</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use> <text x="89.548" y="252.972" class="label">Page</text> <use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use> <text x="537.439" y="383.491" class="label">Network</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use> <text x="400.625" y="253.272" class="label">Cache</text> <use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use> <g class="anim sequence"> <g class="anim"> <g class="joiner"> <path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path> <path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path> </g> <text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1 </text> </g> 
+            <svg viewBox="0 0 549.92853 265"> <g transform="translate(-36.352 -120.593)"> <text x="248.603" y="384.105" class="label">ServiceWorker</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(160.325 204.743)"></use> <text x="89.548" y="252.972" class="label">Page</text> <use transform="translate(-31.309 48.726)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-page"></use> <text x="537.439" y="383.491" class="label">Network</text> <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(455.439 210.129)"></use> <text x="400.625" y="253.272" class="label">Cache</text> <use transform="translate(323.347 80.91)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use> <g class="anim sequence"> <g class="anim"> <g class="joiner"> <path d="M125.228 217.424c-.572 41.786 20.007 74.986 60.648 75.56"></path> <path d="M177.64 287.113l10.897 5.65-10.857 5.002"></path> </g> <text x="189.791" y="151.852" class="fade-in state-label" transform="translate(-33.772 202.062) translate(0 -90)">1 </text> </g>
 
-            <g class="anim"> <g class="joiner"> <path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path> <path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path> </g> <text class="fade-in state-label" y="116.993" x="180.962" transform="translate(-33.772 202.062) translate(220 -30)">2 </text> </g> <g class="anim"> <g class="cross"> <path d="M355.304 209.19l18.813 19.955"></path> <path d="M371.267 206.91l-14.252 23.375"></path> </g> </g> 
-            
-            <g class="anim"> <g class="joiner"> <path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path> <path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path> </g> <text x="214.381" y="167.499" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">3 </text> </g> <g class="anim"> <g class="cross"> <path d="M487.304 315.19l18.813 19.955"></path> <path d="M503.267 312.91l-14.252 23.375"></path> </g> </g> 
-            
-            <g class="anim"> <g class="joiner"> <path d="M250.117 242.337c-1.063-37.234 66.623-45.397 99.6-54.972"></path> <path d="M336.148 185.074l14.283 2.245-9.836 8.624"></path> </g> <text class="fade-in state-label" y="133.95" x="185.218" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4 </text> </g> 
-            
+            <g class="anim"> <g class="joiner"> <path d="M306.297 294.13c53.367 3.57 53.5-42.803 58.308-70.08"></path> <path d="M358.1 231.7l6.902-10.108 3.593 12.025"></path> </g> <text class="fade-in state-label" y="116.993" x="180.962" transform="translate(-33.772 202.062) translate(220 -30)">2 </text> </g> <g class="anim"> <g class="cross"> <path d="M355.304 209.19l18.813 19.955"></path> <path d="M371.267 206.91l-14.252 23.375"></path> </g> </g>
+
+            <g class="anim"> <g class="joiner"> <path d="M305.727 320.923c63.06 22.954 117.92 22.76 182.588 6.315"></path> <path d="M477.033 324.593l15.393 1.14-11.972 9.692"></path> </g> <text x="214.381" y="167.499" class="fade-in state-label" transform="translate(-33.772 202.062) translate(219.43 -3.206)">3 </text> </g> <g class="anim"> <g class="cross"> <path d="M487.304 315.19l18.813 19.955"></path> <path d="M503.267 312.91l-14.252 23.375"></path> </g> </g>
+
+            <g class="anim"> <g class="joiner"> <path d="M250.117 242.337c-1.063-37.234 66.623-45.397 99.6-54.972"></path> <path d="M336.148 185.074l14.283 2.245-9.836 8.624"></path> </g> <text class="fade-in state-label" y="133.95" x="185.218" transform="translate(-33.772 202.062) translate(129.355 -98.981)">4 </text> </g>
+
             <g class="anim"> <g class="joiner"> <path d="M349.054 156.7c-48.11-26.075-154.585-24.56-198.804-3.377"></path> <path d="M156.36 144.117l-9.12 9.69 11.97 1.712"></path> </g> <text x="145.324" y="67.993" class="fade-in state-label" transform="translate(-33.772 202.062) translate(129.355 -98.981)">5 </text> </g> </g> </g> </svg>
             <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
         </section>
@@ -250,60 +248,6 @@ self.addEventListener('fetch', event => {<div class='fragment'>  const url = new
             </ul>
         </section>
 
-        <section>
-            <h1>Push</h1>
-        </section>
-
-        <section>
-            <h2>manifest.json</h2>
-            <div>
-                <pre><code data-trim>
-{
-  &hellip;
-  "gcm_sender_id": "593836075156"
-}
-                </code></pre>
-            </div>
-        </section>
-
-        <section>
-            <h2>Subscription</h2>
-
-            <svg style="width: 100px; height: 100px">
-                <use transform="translate(-70 -70)" xlink:href="#diagram-page"></use>
-            </svg>
-
-            <pre><code data-trim data-noescape>
-navigator.serviceWorker.register('/worker.js').then(swRegistration => {<div class="fragment">  swRegistration.pushManager.subscribe({
-    userVisibleOnly: true
-  }).then( sub => console.log('endpoint:', sub.endpoint) );</div>});
-            </code></pre>
-
-        </section>
-
-        <section>
-            <h2>Handling requests</h2>
-
-            <svg style="width: 100px; height: 100px">
-                <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
-            </svg>
-
-            <pre><code data-trim data-noescape>
-self.addEventListener('push', event => {<div class="fragment">  event.waitUntil(
-    self.registration.showNotification('Title', {
-      body: 'The Message',
-      icon: 'images/icon.png',
-      tag: 'my-tag'
-    }));</div>});
-            </code></pre>
-
-        </section>
-
-        <section class="diagram-container" data-fragment-callback="diagramNextStep">
-            <svg viewBox="0 0 549.92853 342.97787"><g transform="translate(-36.352 -42.615)"><text x="100" y="180" class="label">Push</text><text x="100" y="210" class="label">Message</text></text><text x="321.902" y="189.362" class="label">ServiceWorker</text><text x="538" y="186.362" class="label">Network</text><text y="379.362" x="216.277" class="label">Notification</text><text x="424.277" y="381.362" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cloud" width="549.929" height="342.978" transform="translate(16.971 15.971)"></use><use transform="translate(233.286 11.257)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(454.257 13)"></use><use transform="translate(347 209)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-notification" width="549.929" height="342.978" transform="translate(135 209)"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M154.643 84.45h103"></path><path d="M248.26 79.72l10.9 4.51-10.858 5"></path></g><text x="218.128" y="94.32" class="fade-in state-label" transform="translate(-6.971 127.219) translate(-1.386 -148.131)">1</text></g><g class="anim"><text class="fade-in state-label" x="358.572" y="83.597" transform="translate(-6.971 127.219) translate(81.772 -141.141)">2</text><g class="joiner"><path d="M379.793 78.763l102.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M379.793 96.763l102.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M379.793 90.763l102.057.46"></path></g><g class="joiner"><path d="M379.793 84.763l102.057.46"></path></g></g><g class="anim"><g class="joiner"><path d="M487.095 112.714c-87.967 6.467-78.01 129.51-78.01 129.51l-5.228-6.838"></path></g><g class="joiner"><path d="M495.443 130.41c-75.546 1.314-68.358 111.813-68.358 111.813l4.022-6.434"></path></g><g class="joiner"><path d="M492.258 124.78c-78.995 1.655-71.173 117.443-71.173 117.443"></path></g><g class="joiner"><path d="M489.073 118.747c-82.676 3.836-73.988 123.476-73.988 123.476"></path></g><text y="191.776" x="455.732" class="fade-in state-label" transform="translate(-6.971 127.219) translate(7.441 -127.441)">3</text></g><g class="anim"><text class="fade-in state-label" y="145.264" x="219.272" transform="translate(-6.971 127.219) translate(-10.978 -84.94)">4</text><g class="joiner"><path d="M262.968 124.172c-57.24 1.717-45.827 116.772-45.827 116.772"></path><path d="M211.077 231.84l5.724 11.448 5.154-11.448"></path></g></g></g></g></svg>
-            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
-        </section>
-
 
         <section>
             <h1>Background sync</h1>
@@ -314,21 +258,27 @@ self.addEventListener('push', event => {<div class="fragment">  event.waitUntil(
         </section>
 
         <section class="diagram-container" data-fragment-callback="diagramNextStep">
-            <svg viewBox="0 0 460 160">
+            <svg viewBox="0 0 610 160">
                 <g transform="translate(-36.352 -225.593)">
-                    <text x="106.692" y="368.362" class="label">Sync</text>
-                    <text x="251.902" y="368.362" class="label">Service Worker</text>
-                    <text x="428" y="369.362" class="label">Network</text>
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-event" width="549.929" height="342.978" transform="translate(19.106 188.308)"></use>
-                    <use transform="translate(172 188)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw"></use>
-                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(346 192)"></use>
+                    <text x="106.692" y="368.362" class="label">Page</text>
+                    <text x="251.902" y="368.362" class="label">Sync</text>
+                    <text x="428" y="368.362" class="label">Service Worker</text>
+                    <text x="580" y="369.362" class="label">Network</text>
+                    <use xlink:href="#diagram-page" width="549.929" height="342.978" transform="translate(-10.894 158.308)"></use>
+                    <use xlink:href="#diagram-event" height="342.978" width="549.929" transform="translate(172 188)"></use>
+                    <use xlink:href="#diagram-sw" width="549.929" height="342.978" transform="translate(326 192)"></use>
+                    <use xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(500 192)"></use>
                     <g class="anim sequence">
                         <g class="anim">
                             <g class="joiner"><path d="M160.126 280.362h37.956"></path><path d="M190.188 275.633l10.898 4.51-10.857 5"></path></g>
                             <text x="160.128" y="96.32" class="fade-in state-label" transform="translate(18 175)">1</text>
                         </g>
-                        <g class="anim">
-                            <text class="fade-in state-label" x="402.572" y="83.597" transform="translate(18 175) translate(-70.315 1.985)">2</text><g class="joiner"><path d="M324.677 269.67l50.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M324.677 287.67l50.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M324.677 281.67l50.057.46"></path></g><g class="joiner"><path d="M324.677 275.67l50.057.46"></path></g>
+                        <g class="anim" transform="translate(150 0)">
+                            <g class="joiner"><path d="M160.126 280.362h37.956"></path><path d="M190.188 275.633l10.898 4.51-10.857 5"></path></g>
+                            <text x="160.128" y="96.32" class="fade-in state-label" transform="translate(18 175)">2</text>
+                        </g>
+                        <g class="anim" transform="translate(150 0)">
+                            <text class="fade-in state-label" x="402.572" y="83.597" transform="translate(18 175) translate(-70.315 1.985)">3</text><g class="joiner"><path d="M324.677 269.67l50.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M324.677 287.67l50.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M324.677 281.67l50.057.46"></path></g><g class="joiner"><path d="M324.677 275.67l50.057.46"></path></g>
                         </g>
                     </g>
                 </g>
@@ -365,6 +315,49 @@ self.addEventListener('sync', event => {
   }
 });
 </code></pre>
+        </section>
+
+        <section>
+            <h1>Push</h1>
+        </section>
+
+        <section>
+            <h2>Subscription</h2>
+
+            <svg style="width: 100px; height: 100px">
+                <use transform="translate(-70 -70)" xlink:href="#diagram-page"></use>
+            </svg>
+
+            <pre><code data-trim data-noescape>
+navigator.serviceWorker.register('/worker.js').then(swRegistration => {<div class="fragment">  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: publicKey
+  }).then( sub => console.log('endpoint:', sub.endpoint) );</div>});
+            </code></pre>
+
+        </section>
+
+        <section class="diagram-container" data-fragment-callback="diagramNextStep">
+            <svg viewBox="0 0 549.92853 342.97787"><g transform="translate(-36.352 -42.615)"><text x="100" y="180" class="label">Push</text><text x="100" y="210" class="label">Message</text></text><text x="321.902" y="189.362" class="label">ServiceWorker</text><text x="538" y="186.362" class="label">Network</text><text y="379.362" x="216.277" class="label">Notification</text><text x="424.277" y="381.362" class="label">Cache</text><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cloud" width="549.929" height="342.978" transform="translate(16.971 15.971)"></use><use transform="translate(233.286 11.257)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-sw"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-network" width="549.929" height="342.978" transform="translate(454.257 13)"></use><use transform="translate(347 209)" height="342.978" width="549.929" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-cache"></use><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#diagram-notification" width="549.929" height="342.978" transform="translate(135 209)"></use><g class="anim sequence"><g class="anim"><g class="joiner"><path d="M154.643 84.45h103"></path><path d="M248.26 79.72l10.9 4.51-10.858 5"></path></g><text x="218.128" y="94.32" class="fade-in state-label" transform="translate(-6.971 127.219) translate(-1.386 -148.131)">1</text></g><g class="anim"><text class="fade-in state-label" x="358.572" y="83.597" transform="translate(-6.971 127.219) translate(81.772 -141.141)">2</text><g class="joiner"><path d="M379.793 78.763l102.057.46-4.882-3.546"></path></g><g class="joiner"><path d="M379.793 96.763l102.057.46-5.256 3.436"></path></g><g class="joiner"><path d="M379.793 90.763l102.057.46"></path></g><g class="joiner"><path d="M379.793 84.763l102.057.46"></path></g></g><g class="anim"><g class="joiner"><path d="M487.095 112.714c-87.967 6.467-78.01 129.51-78.01 129.51l-5.228-6.838"></path></g><g class="joiner"><path d="M495.443 130.41c-75.546 1.314-68.358 111.813-68.358 111.813l4.022-6.434"></path></g><g class="joiner"><path d="M492.258 124.78c-78.995 1.655-71.173 117.443-71.173 117.443"></path></g><g class="joiner"><path d="M489.073 118.747c-82.676 3.836-73.988 123.476-73.988 123.476"></path></g><text y="191.776" x="455.732" class="fade-in state-label" transform="translate(-6.971 127.219) translate(7.441 -127.441)">3</text></g><g class="anim"><text class="fade-in state-label" y="145.264" x="219.272" transform="translate(-6.971 127.219) translate(-10.978 -84.94)">4</text><g class="joiner"><path d="M262.968 124.172c-57.24 1.717-45.827 116.772-45.827 116.772"></path><path d="M211.077 231.84l5.724 11.448 5.154-11.448"></path></g></g></g></g></svg>
+            <div class="author"><a href="https://jakearchibald.com/2014/offline-cookbook/">&copy; Jake Archibald</a></div>
+        </section>
+
+        <section>
+            <h2>Handling requests</h2>
+
+            <svg style="width: 100px; height: 100px">
+                <use transform="translate(-40 -40)" xlink:href="#diagram-sw"></use>
+            </svg>
+
+            <pre><code data-trim data-noescape>
+self.addEventListener('push', event => {<div class="fragment">  event.waitUntil(
+    self.registration.showNotification('Title', {
+      body: 'The Message',
+      icon: 'images/icon.png',
+      tag: 'my-tag'
+    }));</div>});
+            </code></pre>
+
         </section>
 
         <section>
